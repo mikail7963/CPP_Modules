@@ -5,6 +5,24 @@ Span::Span()
 
 }
 
+Span::Span(const Span &cpy)
+{
+	this->maxSize = cpy.maxSize;
+	this->numbers = cpy.numbers;
+	this->sizeCount = cpy.sizeCount;
+}
+
+Span& Span::operator=(const Span &cpy)
+{
+	if (this != &cpy)
+	{
+		this->maxSize = cpy.maxSize;
+		this->numbers = cpy.numbers;
+		this->sizeCount = cpy.sizeCount;	
+	}
+	return (*this);
+}
+
 Span::Span(unsigned int N)
 {
 	this->maxSize = N;

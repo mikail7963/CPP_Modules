@@ -14,8 +14,10 @@ private:
 	unsigned int sizeCount;
 public:
 	Span();
-	Span(unsigned int number);
+	Span(const Span &cpy);
+	Span& operator=(const Span &cpy);
 	~Span();
+	Span(unsigned int number);
 	void addNumber(unsigned int number);
 	unsigned int shortestSpan();
 	int longestSpan();
