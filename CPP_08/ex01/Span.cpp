@@ -9,7 +9,6 @@ Span::Span(const Span &cpy)
 {
 	this->maxSize = cpy.maxSize;
 	this->numbers = cpy.numbers;
-	this->sizeCount = cpy.sizeCount;
 }
 
 Span& Span::operator=(const Span &cpy)
@@ -18,7 +17,6 @@ Span& Span::operator=(const Span &cpy)
 	{
 		this->maxSize = cpy.maxSize;
 		this->numbers = cpy.numbers;
-		this->sizeCount = cpy.sizeCount;	
 	}
 	return (*this);
 }
@@ -26,7 +24,6 @@ Span& Span::operator=(const Span &cpy)
 Span::Span(unsigned int N)
 {
 	this->maxSize = N;
-	this->sizeCount = 0;
 }
 
 Span::~Span()
@@ -37,9 +34,8 @@ Span::~Span()
 void Span::addNumber(unsigned int number)
 {
 	if (maxSize == this->numbers.size())
-		throw std::runtime_error("Error");
+		throw std::runtime_error("Span is full, cannot add more elements");
 	this->numbers.push_back(number);
-	this->sizeCount++;
 }
 
 
@@ -50,10 +46,9 @@ unsigned int Span::shortestSpan()
 	unsigned int i = 0;
 
 	if (this->numbers.size() < 2)
-		throw std::runtime_error("Error");
+		throw std::runtime_error("Need at least 2 elements to calculate span");
     std::sort(numbers.begin(), numbers.end());
-	std::vector<unsigned int>::iterator it = numbers.begin();
-	MinSpan = it[this->sizeCount - 1] - it[0];
+	MinSpan = numbers[1] - numbers[0];
 	while (i < numbers.size() - 1)
 	{
 		currentSpan = numbers[i + 1] - numbers[i];
@@ -64,7 +59,7 @@ unsigned int Span::shortestSpan()
 	return (MinSpan);
 }
 
-int Span::longestSpan()
+unsigned int Span::longestSpan()
 {
 	if (this->numbers.size()  < 2)
 		throw std::runtime_error("Error");

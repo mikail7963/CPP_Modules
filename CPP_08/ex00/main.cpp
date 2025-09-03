@@ -2,7 +2,6 @@
 #include <vector>
 #include <list>
 
-
 int main()
 {
 	std::vector<int> vec;
@@ -32,4 +31,13 @@ int main()
 	{
 		std::cerr << e.what() << '\n';	
 	}
+	try
+	{
+		std::cout << *easyfind(lis, 999) << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 }

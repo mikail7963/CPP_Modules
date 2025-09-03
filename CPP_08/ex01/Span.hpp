@@ -11,7 +11,6 @@ class Span
 private:
 	std::vector<unsigned int> numbers;
 	unsigned int maxSize;
-	unsigned int sizeCount;
 public:
 	Span();
 	Span(const Span &cpy);
@@ -20,7 +19,7 @@ public:
 	Span(unsigned int number);
 	void addNumber(unsigned int number);
 	unsigned int shortestSpan();
-	int longestSpan();
+	unsigned int longestSpan();
 	template <typename Iter> 
 	void addNumbers(Iter begin, Iter end);
 };
@@ -29,9 +28,5 @@ public:
 template <typename Iter> 
 void Span::addNumbers(Iter begin, Iter end)
 {
-	while (begin !=end)
-	{
-		addNumber(*begin);
-		begin++;
-	}
+	numbers.insert(numbers.end(), begin, end);
 }
