@@ -38,13 +38,10 @@ void Harl::complain( std::string level )
 	{
 		if (option[i] == level)
 		{
-			while (i < 4)
-			{
-				(this->*funcs[i])();
-				i++;
-			}			
+			(this->*funcs[i])();
 			return ;
 		}
 		i++;
 	}
+	std::cerr << "Unknown complaint level: " << level << std::endl;
 }

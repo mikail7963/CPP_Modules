@@ -19,17 +19,14 @@ int main(int argc, char **argv)
 		case 1:
 		{
 			harl.complain("DEBUG");
-			break;
 		}
 		case 2:
 		{
 			harl.complain("INFO");
-			break;
 		}
 		case 3:
 		{
 			harl.complain("WARNING");
-			break;
 		}
 		case 4:
 		{
@@ -42,4 +39,5 @@ int main(int argc, char **argv)
 			break;
 		}	
 	}
+	return (0);
 }

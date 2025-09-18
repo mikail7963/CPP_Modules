@@ -47,7 +47,9 @@ int main(int argc, char **args)
     while (std::getline(infile, line))
 	{
 		replaceString(line, args[2], args[3]);
-        outFile << line << "\n";
+        outFile << line;
+		if (!infile.eof())
+			outFile << std::endl;
     }
 	infile.close();
 	outFile.close();
