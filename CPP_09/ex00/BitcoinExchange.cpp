@@ -1,24 +1,28 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange()  {}
+BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
 {
-	
+	this->data = obj.data;
 }
 
-//BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
-//{
-	
-//}
-
-//BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange& ins)
-//{
-	
-//}
-
-BitcoinExchange::~BitcoinExchange()
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange& ins)
 {
-	
+	if (this != &ins)
+	{
+		this->data = getData();
+	}
+	return (*this);
 }
+
+
+std::map<std::string, float> BitcoinExchange::getData() const
+{
+	return data;
+}
+
 
 void BitcoinExchange::AddData(std::ifstream &file)
 {
@@ -59,14 +63,14 @@ void BitcoinExchange::FindBtc(std::string &line)
 	std::stringstream ss;
 	ss << &line[line.find('|') + 1];
 	ss >> inputValue;
-	if (inputValue < 0)
-	{
-		std::cout << "Error: not a positive number."  << std::endl;
-		return;
-	}
 	if (static_cast<long>(inputValue) > 2147483647)
 	{
 		std::cout << "Error: too large a number."  << std::endl;
+		return;
+	}
+	if (inputValue < 0 || inputValue > 1000)
+	{
+		std::cout << "Error: not a positive number."  << std::endl;
 		return;
 	}
 	float value = it->second;

@@ -18,8 +18,7 @@ class BitcoinExchange
 	~BitcoinExchange();
 	void AddData(std::ifstream &file);
 	void FindBtc(std::string &line);
+	std::map<std::string, float> getData() const;
 };
-
-
 
 #endif
