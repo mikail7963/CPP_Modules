@@ -13,7 +13,7 @@ void RPN::AddStack(std::string &arg, int i)
 	ss.clear();
 	ss << arg[i];
 	ss >> value;
-	this->stack.push_back(value);
+	this->stack.push(value);
 }
 
 int RPN::StartCalculate(std::string &arg)
@@ -34,20 +34,20 @@ int RPN::StartCalculate(std::string &arg)
 			if (this->stack.size() < 2)
             {
 				if (arg[i] == '+')
-					result = this->stack.back() + 0;
+					result = this->stack.top() + 0;
 				if (arg[i] == '-')
-					result = this->stack.back() - 0;
+					result = this->stack.top() - 0;
 				if (arg[i] == '*')
-					result = this->stack.back() * 0;
-				this->stack.clear();
-				this->stack.push_back(result);
+					result = this->stack.top() * 0;
+				
+				this->stack.push(result);
 				i++;
 				continue;
             }
-			int b = this->stack.back();
-			this->stack.pop_back();
-			int a = this->stack.back();
-			this->stack.pop_back();
+			int b = this->stack.top();
+			this->stack.pop();
+			int a = this->stack.top();
+			this->stack.pop();
 			if (arg[i] == '+')
 				result = a + b;
 			if (arg[i] == '-')
@@ -63,7 +63,8 @@ int RPN::StartCalculate(std::string &arg)
                 }
 				result = a / b;
 			}
-			this->stack.push_back(result);
+			this->stack = std::stack<int>();
+			this->stack.push(result);
 		}
 		i++;
 	}

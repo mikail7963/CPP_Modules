@@ -5,12 +5,12 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
-#include <vector>
+#include <stack>
 
 class RPN
 {
 private:
-	std::vector<int> stack;
+	std::stack<int> stack;
 public:
 	RPN();
 	~RPN();
