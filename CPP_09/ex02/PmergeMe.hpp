@@ -6,18 +6,25 @@
 #include <cstdlib>
 #include <vector>
 #include <deque>
+#include <ctime>
+#include <iomanip>
 
 class PmergeMe
 {
 private:
 	std::vector<int>	VectorNum;
 	std::deque<int>		DequeNum;
+	std::vector<int> fordJohnsonSortVec(std::vector<int> array);
+	std::deque<int>  fordJohnsonSortDeq(std::deque<int> array);
 public:
 	PmergeMe();
+	PmergeMe(const PmergeMe& obj);
+	PmergeMe &operator=(const PmergeMe& obj);
 	~PmergeMe();
-	void AddVector(std::string &arg);
+	void AddNumbers(std::string &arg);
+ 	void shortVector();
+ 	void printVector();
+ 	void shortDeque();
 };
-
-
 
 #endif

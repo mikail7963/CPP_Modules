@@ -1,55 +1,56 @@
 #include "PmergeMe.hpp"
 
-void checkArgument(std::string arg)
+void checkArgument(int argc, char **argv)
 {
-	std::stringstream ss;
-	long value;
-	int i = 0;
-	int argLen;
-	int len;
+    for (int i = 1; i < argc; i++)
+    {
+        std::string arg = argv[i];
+        for (size_t j = 0; j < arg.length(); j++)
+        {
+            if (!(arg[j] >= '0' && arg[j] <= '9'))
+            {
+                std::cout << "Error" << std::endl;
+                exit(1);
+            }
+        }
+        long value = std::atol(arg.c_str());
+        if (value < 0 || value > 2147483647)
+        {
+            std::cout << "Error" << std::endl;
+            exit(1);
+        }
+        if (arg.length() > 10)
+        {
+            std::cout << "Error" << std::endl;
+            exit(1);
+        }
+    }
+}
 
-	argLen = arg.length();
-	while (i < argLen)
-	{
-		ss.clear();
-		ss.str("");
-		len = 0;
-		while (i < argLen && arg[i] != ' ')
-		{
-			if (arg.c_str()[i] && arg[i] != ' ' && !(arg[i] >= '0' &&  arg[i] <= '9'))
-			{
-				std::cout << "Error " << std::endl;
-				exit(1);
-			}
-			ss << arg[i];
-			i++;
-			len++;
-		}
-		if (len > 10)
-		{
-			std::cout << "Error" << std::endl;
-			exit(1);
-		}
-		ss >> value;
-		if (value < 0 || value > 2147483647)
-		{
-			std::cout << "Error" << std::endl;
-			exit(1);
-		}
-		i++;
-	}
+std::string combineArguments(int argc, char **argv)
+{
+	std::string combinedArgs = "";
+    for (int i = 1; i < argc; i++)
+    {
+        combinedArgs += argv[i];
+        if (i < argc - 1)
+            combinedArgs += " ";
+    }
+	return combinedArgs;
 }
 
 int main(int argc, char **argv)
 {
-	if (argc != 2 || argv[1][0] == 0)
-	{
-		std::cout << "Error" << std::endl;
-		return (1);
-	}
-	checkArgument(argv[1]);
-	PmergeMe Merge;
-	std::string arg = argv[1];
-	Merge.AddVector(arg);
-	
+    if (argc < 2)
+    {
+        std::cout << "Error" << std::endl;
+        return (1);
+    }
+    checkArgument(argc, argv);
+    std::string combinedArgs = combineArguments(argc, argv);
+    PmergeMe Merge;
+    Merge.AddNumbers(combinedArgs);
+    Merge.shortVector();
+	Merge.shortDeque();
+    return 0;
 }
