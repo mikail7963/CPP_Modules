@@ -13,10 +13,13 @@ class PmergeMe
 {
 private:
 	std::vector<int>	VectorNum;
+	double				VectorTime;
 	std::deque<int>		DequeNum;
 	std::vector<int> fordJohnsonSortVec(std::vector<int> array);
 	std::deque<int>  fordJohnsonSortDeq(std::deque<int> array);
-public:
+	double				DequeTime;
+	public:
+	int					ElementSize;
 	PmergeMe();
 	PmergeMe(const PmergeMe& obj);
 	PmergeMe &operator=(const PmergeMe& obj);
@@ -25,6 +28,8 @@ public:
  	void shortVector();
  	void printVector();
  	void shortDeque();
+	double getVectorTime();
+	double getDequeTime();
 };
 
 #endif

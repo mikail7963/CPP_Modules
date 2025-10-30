@@ -35,5 +35,6 @@ int main(int argc, char **argv)
 	checkArgument(argv);
 	RPN rpn;
 	std::string arg = argv[1];
-	rpn.StartCalculate(arg);
+	if (rpn.StartCalculate(arg))
+		return (1);
 }

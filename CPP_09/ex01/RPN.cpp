@@ -33,16 +33,8 @@ int RPN::StartCalculate(std::string &arg)
 		{
 			if (this->stack.size() < 2)
             {
-				if (arg[i] == '+')
-					result = this->stack.top() + 0;
-				if (arg[i] == '-')
-					result = this->stack.top() - 0;
-				if (arg[i] == '*')
-					result = this->stack.top() * 0;
-				
-				this->stack.push(result);
-				i++;
-				continue;
+				std::cout << "Error" << std::endl;
+				return (1);
             }
 			int b = this->stack.top();
 			this->stack.pop();
@@ -63,11 +55,15 @@ int RPN::StartCalculate(std::string &arg)
                 }
 				result = a / b;
 			}
-			this->stack = std::stack<int>();
 			this->stack.push(result);
 		}
 		i++;
 	}
-	std::cout << result << std::endl;
+	if (this->stack.size() != 1)
+	{
+        std::cout << "Error: error" << std::endl;
+		return (1);
+	}
+	std::cout << this->stack.top() << std::endl;
 	return (0);
 }

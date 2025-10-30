@@ -108,25 +108,25 @@ std::vector<int> PmergeMe::fordJohnsonSortVec(std::vector<int> array)
     return result;
 	
 }
+double PmergeMe::getVectorTime()
+{
+    return VectorTime;
+}
+
+double PmergeMe::getDequeTime()
+{
+    return DequeTime;
+}
+
+
 
 void PmergeMe::shortVector()
 {
-	std::cout << "Before: ";
-	this->printVector();
-	
+    this->ElementSize = this->VectorNum.size();
 	clock_t start = clock();
-
 	this->VectorNum = fordJohnsonSortVec(this->VectorNum);
-
 	clock_t end = clock();
-
-    double time_taken = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
-	std::cout << "After:  ";
-	this->printVector();
-
-	std::cout << "Time to process a range of " << this->VectorNum.size() 
-			<< " elements with std::vector : " << std::fixed << std::setprecision(5) << time_taken << " us" << std::endl;
-
+    this->VectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 }
 
 
@@ -209,8 +209,6 @@ void PmergeMe::shortDeque()
 
 	clock_t end = clock();
 
-    double time_taken = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+    this->DequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-	std::cout << "Time to process a range of " << this->VectorNum.size() 
-			<< " elements with std::deque  : " << std::fixed << std::setprecision(5) << time_taken << " us" << std::endl;
 }

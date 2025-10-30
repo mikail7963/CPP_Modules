@@ -50,7 +50,18 @@ int main(int argc, char **argv)
     std::string combinedArgs = combineArguments(argc, argv);
     PmergeMe Merge;
     Merge.AddNumbers(combinedArgs);
+
+    std::cout << "Before: ";
+    Merge.printVector();
     Merge.shortVector();
 	Merge.shortDeque();
+    std::cout << "After:  ";
+	Merge.printVector();
+    std::cout << "Time to process a range of " << Merge.ElementSize
+    << " elements with std::vector  : " << std::fixed << std::setprecision(5) << Merge.getVectorTime() << " us" << std::endl;
+
+    std::cout << "Time to process a range of " << Merge.ElementSize
+        << " elements with std::deque   : " << std::fixed << std::setprecision(5) << Merge.getDequeTime() << " us" << std::endl;
+
     return 0;
 }

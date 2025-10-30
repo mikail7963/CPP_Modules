@@ -83,16 +83,21 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "Wrong argument Usage:" << std::endl;
-		std::cout << "./btc <file>" << std::endl;
+		std::cout << "Error: could not open file." << std::endl;
 		return (1);
 	}
 	std::ifstream file("data.csv");
 	if (!file.is_open())
+	{
 		std::cout << "No data.csv" << std::endl;
+		return (1);
+	}
 	std::ifstream argFile(argv[1]);
 	if (!argFile.is_open())
+	{
 		std::cout << "File can't open" << std::endl;
+		return (1);
+	}
 	std::string line;
 	BitcoinExchange btc;
 	btc.AddData(file);
