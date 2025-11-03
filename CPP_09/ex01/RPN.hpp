@@ -13,6 +13,8 @@ private:
 	std::stack<int> stack;
 public:
 	RPN();
+	RPN(const RPN& obj);
+	RPN& operator=(const RPN& obj);
 	~RPN();
 	int StartCalculate(std::string &arg);
 	void AddStack(std::string &arg, int i);

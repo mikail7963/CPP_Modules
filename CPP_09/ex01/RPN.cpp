@@ -3,6 +3,17 @@
 RPN::RPN()  {}
 RPN::~RPN() {}
 
+RPN::RPN(const RPN& obj)
+{
+	this->stack = obj.stack;
+}
+
+RPN& RPN::operator=(const RPN& obj)
+{
+	if (this != &obj)
+		this->stack = obj.stack;
+	return (*this);
+}
 
 void RPN::AddStack(std::string &arg, int i)
 {
