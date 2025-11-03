@@ -61,7 +61,7 @@ int RPN::StartCalculate(std::string &arg)
 	}
 	if (this->stack.size() != 1)
 	{
-        std::cout << "Error: error" << std::endl;
+        std::cout << "Error " << std::endl;
 		return (1);
 	}
 	std::cout << this->stack.top() << std::endl;

@@ -7,6 +7,9 @@ PmergeMe::PmergeMe(const PmergeMe& obj)
 {
 	this->DequeNum = obj.DequeNum;
 	this->VectorNum = obj.VectorNum;
+    this->ElementSize = 0;
+    this->DequeTime = 0;
+    this->VectorTime = 0;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& obj)
@@ -15,6 +18,9 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& obj)
 	{
 		this->DequeNum = obj.DequeNum;
 		this->VectorNum = obj.VectorNum;
+        this->ElementSize = obj.ElementSize;
+        this->DequeNum = obj.DequeNum;
+        this->VectorTime = obj.VectorTime;
 	}
 	return (*this);
 }
@@ -49,22 +55,20 @@ void	PmergeMe::AddNumbers(std::string &arg)
 
 std::vector<int> PmergeMe::fordJohnsonSortVec(std::vector<int> array)
 {
+    std::vector<std::pair<int, int> > duoList;
+    int straggler = 0;
+    bool hasStraggler = false;
+
     if (array.size() <= 1)
-        return array;
+        return (array);
     if (array.size() == 2)
     {
         if (array[0] > array[1])
             std::swap(array[0], array[1]);
-        return array;
-    }
-    std::vector<std::pair<int, int> > duoList;
-    int straggler = 0;
-    bool hasStraggler = false;
-    
+        return (array);
+    }    
     for (size_t i = 0; i + 1 < array.size(); i += 2)
-    {
         duoList.push_back(std::make_pair(array[i], array[i + 1]));
-    }
     if (array.size() % 2 != 0)
     {
         hasStraggler = true;
@@ -89,25 +93,26 @@ std::vector<int> PmergeMe::fordJohnsonSortVec(std::vector<int> array)
         pending.push_back(duoList[i].first);
 
     std::vector<int> result = mainChain;
-    
+        
     if (!duoList.empty())
         result.insert(result.begin(), duoList[0].first);
-    
+
+    std::vector<int>::iterator firstPos;
+    std::vector<int>::iterator stragglePos;
     for (size_t i = 1; i < duoList.size(); ++i)
     {
-        std::vector<int>::iterator pos = std::lower_bound(result.begin(), result.end(), duoList[i].first);
-        result.insert(pos, duoList[i].first);
+        firstPos = std::lower_bound(result.begin(), result.end(), duoList[i].first);
+        result.insert(firstPos, duoList[i].first);
     }
     
     if (hasStraggler)
     {
-        std::vector<int>::iterator pos = std::lower_bound(result.begin(), result.end(), straggler);
-        result.insert(pos, straggler);
+        stragglePos = std::lower_bound(result.begin(), result.end(), straggler);
+        result.insert(stragglePos, straggler);
     }
-    
-    return result;
-	
+    return (result);
 }
+
 double PmergeMe::getVectorTime()
 {
     return VectorTime;
@@ -118,8 +123,6 @@ double PmergeMe::getDequeTime()
     return DequeTime;
 }
 
-
-
 void PmergeMe::shortVector()
 {
     this->ElementSize = this->VectorNum.size();
@@ -128,7 +131,6 @@ void PmergeMe::shortVector()
 	clock_t end = clock();
     this->VectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 }
-
 
 void PmergeMe::printVector()
 {
@@ -140,9 +142,11 @@ void PmergeMe::printVector()
 	
 }
 
-
 std::deque<int> PmergeMe::fordJohnsonSortDeq(std::deque<int> array)
 {
+    std::deque<std::pair<int, int> > duoList;
+    int straggler = 0;
+    bool hasStraggler = false;
     if (array.size() <= 1)
         return array;
     if (array.size() == 2)
@@ -151,9 +155,6 @@ std::deque<int> PmergeMe::fordJohnsonSortDeq(std::deque<int> array)
             std::swap(array[0], array[1]);
         return array;
     }
-    std::deque<std::pair<int, int> > duoList;
-    int straggler = 0;
-    bool hasStraggler = false;
     
     for (size_t i = 0; i + 1 < array.size(); i += 2)
     {
@@ -186,19 +187,19 @@ std::deque<int> PmergeMe::fordJohnsonSortDeq(std::deque<int> array)
     
     if (!duoList.empty())
         result.insert(result.begin(), duoList[0].first);
-    
+    std::deque<int>::iterator firstPos;
+    std::deque<int>::iterator stragglePos;
     for (size_t i = 1; i < duoList.size(); ++i)
     {
-        std::deque<int>::iterator pos = std::lower_bound(result.begin(), result.end(), duoList[i].first);
-        result.insert(pos, duoList[i].first);
+        firstPos = std::lower_bound(result.begin(), result.end(), duoList[i].first);
+        result.insert(firstPos, duoList[i].first);
     }
-    
     if (hasStraggler)
     {
-        std::deque<int>::iterator pos = std::lower_bound(result.begin(), result.end(), straggler);
-        result.insert(pos, straggler);
+        stragglePos = std::lower_bound(result.begin(), result.end(), straggler);
+        result.insert(stragglePos, straggler);
     }
-    return result;
+    return (result);
 }
 
 void PmergeMe::shortDeque()

@@ -27,12 +27,13 @@ std::map<std::string, float> BitcoinExchange::getData() const
 void BitcoinExchange::AddData(std::ifstream &file)
 {
 	std::string line;
-	getline(file, line);
-	getline(file, line);
 	std::string date;
 	std::string strValue;
 	float value;
 	std::stringstream ss;
+	
+	getline(file, line);
+	getline(file, line);
 	while (!file.eof())
 	{
 		date = line.substr(0,10);

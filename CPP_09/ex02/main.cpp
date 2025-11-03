@@ -2,8 +2,12 @@
 
 void checkArgument(int argc, char **argv)
 {
+    std::stringstream ss;
+    long value;
     for (int i = 1; i < argc; i++)
     {
+        ss.clear();
+        ss.str("");
         std::string arg = argv[i];
         for (size_t j = 0; j < arg.length(); j++)
         {
@@ -13,7 +17,8 @@ void checkArgument(int argc, char **argv)
                 exit(1);
             }
         }
-        long value = std::atol(arg.c_str());
+        ss << arg;
+        ss >> value;
         if (value < 0 || value > 2147483647)
         {
             std::cout << "Error" << std::endl;

@@ -98,9 +98,10 @@ int main(int argc, char **argv)
 		std::cout << "File can't open" << std::endl;
 		return (1);
 	}
-	std::string line;
 	BitcoinExchange btc;
 	btc.AddData(file);
 	readFile(argFile, btc);
+	file.close();
+	argFile.close();
 	return (0);
 }
