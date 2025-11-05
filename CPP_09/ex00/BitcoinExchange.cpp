@@ -64,12 +64,17 @@ void BitcoinExchange::FindBtc(std::string &line)
 	std::stringstream ss;
 	ss << &line[line.find('|') + 1];
 	ss >> inputValue;
-	if (static_cast<long>(inputValue) > 2147483647)
+	if (ss.fail() || !ss.eof())
+	{
+		std::cout << "Error: bad input => " << line << std::endl;
+		return;	
+	}
+	if (inputValue > 1000)
 	{
 		std::cout << "Error: too large a number."  << std::endl;
 		return;
 	}
-	if (inputValue < 0 || inputValue > 1000)
+	if (inputValue < 0)
 	{
 		std::cout << "Error: not a positive number."  << std::endl;
 		return;

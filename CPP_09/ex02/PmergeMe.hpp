@@ -18,7 +18,7 @@ private:
 	std::vector<int> fordJohnsonSortVec(std::vector<int> array);
 	std::deque<int>  fordJohnsonSortDeq(std::deque<int> array);
 	double				DequeTime;
-	public:
+public:
 	int					ElementSize;
 	PmergeMe();
 	PmergeMe(const PmergeMe& obj);

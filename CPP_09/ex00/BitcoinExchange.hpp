@@ -9,9 +9,9 @@
 
 class BitcoinExchange
 {
-	private:
-		std::map<std::string, float> data;
-	public:
+private:
+	std::map<std::string, float> data;
+public:
 	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& obj);
 	BitcoinExchange &operator=(const BitcoinExchange& ins);

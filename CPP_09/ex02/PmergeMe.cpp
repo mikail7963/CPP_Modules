@@ -41,7 +41,7 @@ void	PmergeMe::AddNumbers(std::string &arg)
 		}
 		ss.clear();
 		ss.str("");
-		while (arg[i] != ' ')
+		while (arg[i] && arg[i] != ' ')
 		{
 			ss << arg[i];
 			i++;
