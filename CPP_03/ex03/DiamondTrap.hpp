@@ -3,7 +3,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class DiamondTrap  : public virtual FragTrap , public virtual ScavTrap
+class DiamondTrap  : public virtual ScavTrap , public virtual FragTrap
 {
 private:
 	std::string		_Name;
@@ -13,9 +13,6 @@ public:
 	DiamondTrap(const DiamondTrap &copy);
 	~DiamondTrap();
 	DiamondTrap& operator=(const DiamondTrap& copy);
-
 	void	whoAmI();
-
+	using ScavTrap::attack;
 };
-
-

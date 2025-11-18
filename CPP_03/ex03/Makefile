@@ -1,17 +1,14 @@
 NAME = a.out
-CFLAGS = -Wall -Wextra -Werror -std=c++98 
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+CXX = c++
 SRCS = main.cpp ClapTrap.cpp  ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
 $(NAME): $(OBJS)
-	c++ $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("DefaultScav")
+ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << GREEN  << "ScavTrap Default constructor called" << RESET << std::endl;
 	this->_HitPoints = 100;
@@ -32,10 +32,9 @@ ScavTrap::~ScavTrap()
 	std::cout << RED << "ScavTrap Destructor called" <<  RESET<< std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string& Name)
+ScavTrap::ScavTrap(const std::string& Name) : ClapTrap(Name)
 {
 	std::cout << GREEN << "ScavTrap Constructor called" << RESET <<  std::endl;
-	this->_Name = Name;
 	this->_HitPoints = 100;
 	this->_EnergyPoints = 50;
 	this->_AttackDamage = 20;
@@ -65,4 +64,5 @@ void ScavTrap::attack(const std::string& target)
 				<< RED << target << RESET << ", causing "
 				<< CYAN << this->_AttackDamage << RESET << " points of damage"
 				<< std::endl;
+
 }

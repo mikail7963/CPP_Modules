@@ -1,12 +1,13 @@
 #include "DiamondTrap.hpp"
 #include "ClapTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap("DefaultScav_clap_name")
+DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name"), ScavTrap(), FragTrap()
 {
 	std::cout << GREEN  << "DiamondTrap Default constructor called" << RESET << std::endl;
-	this->_HitPoints = FragTrap::_HitPoints;
-	this->_EnergyPoints = ScavTrap::_EnergyPoints;
-	this->_AttackDamage = FragTrap::_AttackDamage;
+	this->_Name = "Default";
+	this->_HitPoints = 100;
+	this->_EnergyPoints = 50;
+	this->_AttackDamage = 30;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &copy)
@@ -33,14 +34,13 @@ DiamondTrap::~DiamondTrap()
 	std::cout << RED << "DiamondTrap Destructor called" <<  RESET<< std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string Name)
+DiamondTrap::DiamondTrap(const std::string Name) : ClapTrap(Name + "_clap_name"), ScavTrap(), FragTrap()
 {
 	std::cout << GREEN << "DiamondTrap Constructor called" << RESET <<  std::endl;
 	this->_Name = Name;
-	ClapTrap::_Name = Name + "_clap_name";
-	this->_HitPoints = FragTrap::_HitPoints;
-	this->_EnergyPoints = ScavTrap::_EnergyPoints;
-	this->_AttackDamage = FragTrap::_AttackDamage;
+	this->_HitPoints = 100;
+	this->_EnergyPoints = 50;
+	this->_AttackDamage = 30;
 }
 
 void	DiamondTrap::whoAmI()
